@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The website you never knew you needed</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f9;
+      color: #333;
+      text-align: center;
+    }
+    h1, h2 {
+      font-family: 'Georgia', serif;
+      color: #333;
+    }
+    #clock {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .button {
+      padding: 1rem 2rem;
+      font-size: 1.3rem;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      margin: 15px;
+      width: 220px;
+      text-align: center;
+      transition: background-color 0.3s;
+      display: inline-block;
+    }
+    .button:hover {
+      background-color: #45a049;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      margin-top: 20px;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      min-width: 200px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 10px;
+    }
+    .dropdown-content a {
+      color: #333;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .dropdown:hover .dropbtn {
+      background-color: #3e8e41;
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="frontPage">
+    <h1>The website you never knew you needed</h1>
+    <button class="button" onclick="goToVault()">Vault</button>
+    <button class="button" onclick="crashWebsite()">Crash Website</button>
+  </div>
+
+ 
+  <div id="timerPage" style="display: none;">
+    <h1>THE MOST PRIZED POSSISSION ISSSS???</h1>
+    <div id="timer" style="font-size: 3rem;"></div>
+    <button class="button" onclick="leaveVault()">Leave Vault</button>
+  </div>
+
+ 
+  
+  <div id="clockPage" style="display: none;">
+    <div id="clock">Loading time...</div>
+    <h1>THE MOST PRIZED POSSISSION ISSSS TIME!!!</h1>
+    <div class="dropdown">
+      <button class="button dropbtn">Translate</button>
+      <div class="dropdown-content">
+        <a href="javascript:void(0)">British English</a>
+        <a href="javascript:void(0)">Australian English</a>
+        <a href="javascript:void(0)">American English</a>
+        <a href="javascript:void(0)">Canadian English</a>
+        <a href="javascript:void(0)">Spanish</a>
+        <a href="javascript:void(0)">French</a>
+        <a href="javascript:void(0)">German</a>
+        <a href="javascript:void(0)">Russian</a>
+        <a href="javascript:void(0)">Mandarin</a>
+        <a href="javascript:void(0)">Hindi</a>
+      </div>
+    </div>
+   
+    <button class="button" onclick="goToMainPage()">Back to Main Page</button>
+  </div>
+
+  <script>
+    // Opens the vault page
+    function goToVault() {
+      document.getElementById('frontPage').style.display = 'none';
+      document.getElementById('timerPage').style.display = 'block';
+      startTimer();
+    }
+
+  
+    function startTimer() {
+      let countdown = 60;
+      const timerElement = document.getElementById('timer');
+      
+      const interval = setInterval(function() {
+        timerElement.textContent = `0:${countdown < 10 ? '0' : ''}${countdown}`;
+        countdown--;
+        if (countdown < 0) {
+          clearInterval(interval);
+          goToClockPage();
+        }
+      }, 1000);
+    }
+
+    
+    function goToClockPage() {
+      document.getElementById('timerPage').style.display = 'none';
+      document.getElementById('clockPage').style.display = 'block';
+      setInterval(updateTime, 1000);
+      updateTime(); 
+    }
+
+    
+    function updateTime() {
+      const clockElement = document.getElementById('clock');
+      const now = new Date();
+      const timeString = now.toLocaleTimeString();
+      clockElement.textContent = timeString;
+    }
+
+    
+    function leaveVault() {
+      document.getElementById('timerPage').style.display = 'none';
+      document.getElementById('frontPage').style.display = 'block';
+    }
+
+    
+    function goToMainPage() {
+      document.getElementById('clockPage').style.display = 'none';
+      document.getElementById('frontPage').style.display = 'block';
+    }
+
+   
+    function crashBrowser() {
+      while (true) {
+        // Infinite loop to overload the CPU
+      }
+    }
+
+    // (simulated browser crash)
+    function crashWebsite() {
+      document.body.innerHTML = "<h1>CRASHING...</h1><p>The browser is about to crash. You've been warned!</p>";
+      crashBrowser();
+    }
+  </script>
+</body>
+</html>
